@@ -21,4 +21,4 @@ Commonly used React routers also tend to offer different approaches to URL-based
 
 While the common state management and routing libs have proved to be usable, the discussed questions keep lingering. These questions matter even with AI that can generate any amount of code with any library: the more concise the code the easier it is to review, debug, and maintain it, and the lower the bundle footprint.
 
-Hopefully, the React StatePack's minimalist and straightforward approach to these topics outlines the direction to a possible solution. Along the way, it internally unifies general-purpose state management and routing, materializing the idea that the URL is shared state, too.
+The React StatePack's minimalist and straightforward approach to these topics outlines the direction to a possible solution. Along the way, it internally unifies general-purpose state management and routing, materializing the idea that the URL is shared state, too.
