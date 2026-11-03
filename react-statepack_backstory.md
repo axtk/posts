@@ -3,18 +3,22 @@ title: React StatePack backstory
 date: 2026-11-03
 ---
 
-With several options available, state management in React apps still feels more cumbersome than it could be. With the React's local state mental model in mind, we might expect that a shared state management lib
+The starting point of [React StatePack](https://www.npmjs.com/package/react-statepack) is an attempt to verify whether it's possible to reuse existing React patterns to achieve a more concise and straightforward approach to shared state management and routing, than other approaches tend to offer. Here's what feels cumbersome about them.
 
-(1) has a simple API introducing a minimal set of entities,<br>
-(2) requires minimal changes to move local state to shared state,<br>
-(3) straightforwardly supports SSR without workaround APIs.
+Most React state management libraries like Redux Toolkit, MobX, Zustand, Effector are based on their own mental models of shared state, significantly different from React's local state. They require sizable code rewrites to migrate from local state to shared state, which is a common scenario, and a substantial paradigm shift to set up shared state from scratch.
 
-The popular approaches to state management seem to depart from at least one of these points:
+So the first question is whether it's inevitable. Can a shared state design maintain a `useState()`-like pattern and move the source of state to a shared location outside of components without forcing in an inventory of new entities (like reducers, slices, thunks, observers, actions, reactions, computeds) and without inventing a completely different API?
 
-Apparently focusing on other aspects, **Redux Toolkit** and **MobX** don't fulfill any of the points listed above by bringing in their own mental models of shared state management with an inventory of new concepts and approaches.
+While Jotai looks like a promising positive answer to this question, it raises a couple of other issues. Setting initial values to a state unit, called atom in Jotai, isolated to a component subtree requires a Jotai-specific `<Provider>` component combined with a store instance (yet another state container) or with Jotai's `useHydrateAtoms()` hook.
 
-**Zustand** does have a simple and minimalist API (point (1) fulfilled), but it's not quite similar to the React's state API, which leads to significant code rewrites while migrating from local state to shared state (so simplicity alone is not sufficient, point (2) unfulfilled). The Zustand's SSR setup requires that the default React store setup be transitioned to vanilla stores<sup>[[1](https://github.com/pmndrs/zustand/tree/main#react-context)]</sup>, which adds another state management pattern to the code and yet another sizable migration rewrite (point (3) unmet). Also, subjectively, Zustand introduces patterns that look unidiomatic in React, like calling methods on Zustand's store hooks (`useXStore.subscribe()`)<sup>[[2](https://github.com/pmndrs/zustand/tree/main#transient-updates-for-often-occurring-state-changes)]</sup>.
+So the second question is again whether this is inevitable. Can the already available API of a regular React Context with its value prop be sufficient to provide isolated initial shared state values, the way it does with other application data? Such isolation is crucial with SSR and tests, so the question isn't idle.
 
-With a useState-like API, **Jotai** is the closest match (points (1) and (2) fulfilled). Still, Jotai requires a workaround API, a special hook, to set up SSR<sup>[[3](https://jotai.org/docs/utilities/ssr)]</sup> (point (3) unmet). Also, subjectively, the Jotai's core `atom()` function with its elaborate capabilities is an overkill for state management that looks hard to tree-shake.
+Other (perhaps subjectively) questionable design choices with state management libs include: complex state units, loaded with untreeshakable custom actions passed around all components whether these actions are used or not (MobX, Zustand) or loaded with a variety of untreeshakable wired-in capabilities regardless of whether they are used (Jotai's atom); unidiomatic patterns, unseen in React, like method calls on a React hook (as in Zustand's `useSomeStore.getState()` or `useSomeStore.subscribe()`).
 
-The `useExternalState()` hook of `react-statepack` is an attempt to come up with a mostly self-explanatory lightweight useState-like approach to shared state management by focusing on the three points listed above. The lib's other hooks are built around the common practical use cases for `useExternalState()`. Whatever unused is tree-shakable.
+Routing code with common libraries doesn't look too lean either. With TanStack Router as an example, file-based routing imposes rigid rules with (subjectively) awkward conventions on the file structure, while code-based routing introduces long-winded ceremonial code (as in `createRootRoute()`, `createRoute()` and explicitly registering the router type).
+
+Commonly used React routers also tend to offer different approaches to URL-based rendering of components and prop values. Unlike components, props are often conditionally rendered with the help of a hook. Is it possible to come up with a coherent approach to URL-based conditional rendering of both components and props? Can it be something like regular conditional rendering introduced in React?
+
+While the common state management and routing libs have proved to be usable, the discussed questions keep lingering. These questions matter even with AI that can generate any amount of code. The more concise the code the easier it is to review and debug it, and the lower the bundle footprint.
+
+Hopefully, the React StatePack's minimalist and straightforward approach to these topics outlines the direction to a possible solution. Along the way, it internally unifies general-purpose state management and routing, as an actual manifestation of the idea that the URL is shared state, too.
