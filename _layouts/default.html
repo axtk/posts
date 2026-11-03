@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="{{page.lang | default: 'en'}}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>{{page.title | strip_html}}</title>
+  <link rel="stylesheet" href="/posts/assets/index.css">{% if content contains "<pre" %}
+  <link rel="stylesheet" href="/posts/assets/code.lightbulb.css">{% endif %}
+  <link rel="icon" type="image/svg+xml" href="/posts/assets/favicon.svg">
+</head>
+<body>
+<div class="layout">
+<header>
+  <p class="metadata">
+    <span class="image">
+      <img src="{{site.github.owner_gravatar_url}}" alt="" height="120">
+    </span><br>
+    <span class="content">
+      <strong><a href="https://github.com/axtk">Alexander Tkačenko</a></strong><br>
+      <span class="date">{{page.date}}</span>
+    </span>
+  </p>
+</header>
+<main>
+<div class="post">
+<h1>{{page.title}}</h1>
+{% comment %}
+{% if page.tags %}
+<p class="tags">
+{%- for tag in page.tags %}
+  <em>{{tag | escape}}</em>{% unless forloop.last %}<span class="sep">, </span>{% endunless -%}
+{% endfor %}
+</p>
+{% endif %}
+{% endcomment %}
+{% if page.abstract %}
+<div class="abstract" role="doc-abstract">
+{{page.abstract}}
+</div>
+{% endif %}
+{{content | replace: '<a href="http', '<a target="_blank" href="http' | replace: '<p>~</p>', '<p class="sep">~</p>' | replace: '<!-- collapsible -->', '<details>' | replace: '<!-- endcollapsible -->', '</details>' | replace: '<!-- post -->', '</div>\n<div class="post">'}}
+</div>
+</main>
+<script src="/posts/assets/stats.js"></script>
+</body>
+</html>

@@ -1,0 +1,217 @@
+:root {
+  --base: #000;
+  --color: #000d;
+  --emphatic-color: #000e;
+  --link-color: #1a46c7;
+  --background: #fff;
+
+  /* --post-em: max(4vmin, 1rem);
+  --max-width: calc(36 * var(--post-em)); */
+  --post-em: 1rem;
+  --max-width: 42rem;
+  --margin-block-start: 1em;
+  --margin-block-end: 1em;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --base: #fff;
+    --color: #fffa;
+    --emphatic-color: #fffe;
+    --background: #1a1a1a;
+    --link-color: deepskyblue;
+  }
+}
+html {
+  color: var(--color);
+  background: var(--background);
+  font: normal 100% / 1.35 sans-serif;
+}
+body {
+  margin: 0;
+}
+table,
+svg {
+  font: inherit;
+  color: inherit;
+}
+p,
+ul,
+ol,
+pre,
+details {
+  margin-block-start: var(--margin-block-start);
+  margin-block-end: var(--margin-block-end);
+}
+ul {
+  padding-inline-start: 1.5em;
+  padding-inline-end: 0;
+}
+li,
+li ul {
+  margin-top: 0.35em;
+  margin-bottom: 0.35em;
+}
+hr {
+  width: 100%;
+  height: 0;
+  background: none;
+  border: none;
+  border-top: 0.1em solid;
+  margin: 2em 0;
+}
+main hr {
+  width: 5em;
+  margin: 2.5em auto;
+}
+main p.sep {
+  font-size: 1.5em;
+  text-align: center;
+  margin: 0.5em 0;
+}
+h1 {
+  font-weight: 900;
+  font-size: 1.6em;
+  line-height: 1.1;
+  margin: 1.5em 0 1em 0;
+}
+h2 {
+  font-size: 1.3em;
+  line-height: 1.1;
+  border-bottom: 0.04em solid rgb(from var(--color) r g b / 0.3);
+  padding: 0 0 0.2em 0;
+  margin: 1.5em 0 0.75em 0;
+}
+h2#related,
+h2#demos {
+  font-size: 0.8rem;
+  font-weight: normal;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgb(from var(--color) r g b / 0.5);
+  margin-top: 2rem;
+}
+h3 {
+  font-size: 1.15em;
+  line-height: 1.1;
+  padding: 0;
+  margin: 1.5em 0 0.75em 0;
+}
+h4 {
+  font-size: 1em;
+  font-weight: bold;
+  line-height: 1.1;
+  padding: 0;
+  margin: 1.5em 0 1em;
+}
+strong,
+h1,
+h2,
+h3,
+h4 {
+  color: var(--emphatic-color);
+}
+a,
+a:hover,
+a:visited,
+a:active {
+  --color: var(--link-color);
+  color: var(--color);
+  text-decoration-thickness: 0.02rem;
+  text-underline-offset: 0.18em;
+}
+.layout {
+  display: flex;
+  flex-direction: column;
+  max-width: var(--max-width);
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0 2rem;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+.post {
+  --r: 1.5em;
+  --d: calc(0.25 * var(--r));
+  --b1: rgb(from var(--base) r g b / 0.35);
+  --b2: rgb(from var(--base) r g b / 0.05);
+  font-size: var(--post-em);
+  background: var(--fill);
+  border: 1px solid var(--b1);
+  border-radius: var(--r);
+  padding: 1.5em;
+  margin: calc(var(--d) + 0.75rem) 0 var(--d);
+  box-sizing: border-box;
+  position: relative;
+  box-sizing: border-box;
+}
+.post:first-of-type {
+  border-radius: 0 var(--r) var(--r) var(--r);
+  margin-top: 0;
+}
+.post::before {
+  --d: calc(0.5 * var(--r));
+  display: block;
+  content: "";
+  background-image: linear-gradient(45deg, var(--b1) 12.50%, var(--b2) 12.50%, var(--b2) 50%, var(--b1) 50%, var(--b1) 62.50%, var(--b2) 62.50%, var(--b2) 100%);
+  background-size: 5px 5px;
+  border-radius: calc(var(--r) + var(--d));
+  position: absolute;
+  inset: 0 calc(-1 * var(--d)) calc(-1 * var(--d)) 0;
+  z-index: -1;
+}
+.post > :first-child {
+  --margin-block-start: 0;
+  margin-top: 0;
+}
+.post > :last-child {
+  --margin-block-end: 0;
+  margin-bottom: 0;
+}
+header,
+footer {
+  --margin-block-start: 0.35em;
+  --margin-block-end: 0.35em;
+  width: 100%;
+  font-size: 0.85rem;
+  color: rgb(from var(--base) r g b / 0.5);
+  box-sizing: border-box;
+}
+header .metadata {
+  display: flex;
+  align-items: center;
+  gap: 0.75em;
+}
+header .metadata > br {
+  display: none;
+}
+header .image {
+  --d: 2rem;
+  display: inline-block;
+  width: var(--d);
+  height: var(--d);
+  font-size: 0;
+  background: rgb(from var(--base) r g b / 0.1);
+  border-radius: 50%;
+  overflow: hidden;
+}
+header .image img {
+  width: var(--d);
+  height: auto;
+}
+footer {
+  text-align: end;
+}
+@media (width <= 600px) {
+  .layout {
+    padding: 0.25rem 0 1rem;
+  }
+  header,
+  footer {
+    padding: 0 0.25rem;
+  }
+  .post::before {
+    right: 0;
+  }
+}
