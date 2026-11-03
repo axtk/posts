@@ -12,7 +12,7 @@
   --margin-block-start: 1em;
   --margin-block-end: 1em;
 }
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --base: #fff;
     --color: #fffb;
@@ -20,7 +20,7 @@
     --background: #1a1a1a;
     --link-color: deepskyblue;
   }
-}
+} */
 html {
   color: var(--color);
   background: var(--background);
