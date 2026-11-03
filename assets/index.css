@@ -15,7 +15,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --base: #fff;
-    --color: #fffa;
+    --color: #fffb;
     --emphatic-color: #fffe;
     --background: #1a1a1a;
     --link-color: deepskyblue;
@@ -127,7 +127,7 @@ a:active {
   min-height: 100vh;
   justify-content: center;
   align-items: center;
-  padding: 1rem 1rem 2rem;
+  padding: 1rem 2rem 2rem;
   margin: 0 auto;
   box-sizing: border-box;
 }
