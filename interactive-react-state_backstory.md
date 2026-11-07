@@ -3,7 +3,7 @@ title: Interactive React State backstory
 date: 2026-11-03
 ---
 
-The starting point of the [Interactive React State](https://www.npmjs.com/package/interactive-react-state) package is an attempt to verify whether it's possible to reuse existing React patterns to achieve a more concise and straightforward approach to shared state management and routing than other approaches tend to offer. Here's what feels cumbersome about them.
+The starting point of the [Interactive React State](https://www.npmjs.com/package/interactive-react-state) library is an attempt to verify whether it's possible to reuse existing React patterns to achieve a more concise and straightforward approach to shared state management and routing than other approaches tend to offer. Here's what feels cumbersome about them.
 
 Most React state management libraries like Redux Toolkit, MobX, Zustand, Effector are based on their own mental models of shared state, significantly different from React's local state. They require sizable code rewrites to migrate from local state to shared state, which is a common scenario, and a substantial paradigm shift to set up shared state from scratch.
 
