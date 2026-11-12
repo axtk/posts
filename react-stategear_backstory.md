@@ -13,7 +13,7 @@ While Jotai looks like a promising positive answer to this question, it raises a
 
 So the second question is again whether this is inevitable. Can the already available API of a regular React Context with its value prop be sufficient to provide isolated initial shared state values, the way it does with other application data? Such isolation is crucial with SSR and tests, so the question isn't idle.
 
-Other (perhaps subjectively) questionable design choices with state management libraries include: embedding actions inside state units, so that untreeshakable custom actions get passed around all components whether these actions are used or not (MobX, Zustand); unidiomatic patterns, unseen in React, like method calls on a React hook (as in Zustand's `useSomeStore.getState()` or `useSomeStore.subscribe()`).
+Other (perhaps subjectively) questionable design choices with state management libraries include: embedding actions inside state units, so that untreeshakable custom actions get passed around all components whether these actions are used or not (MobX, Zustand, Redux Toolkit); unidiomatic patterns, unseen in React, like method calls on a React hook (as in Zustand's `useSomeStore.getState()` or `useSomeStore.subscribe()`).
 
 Routing code with common libraries doesn't look too lean either. With TanStack Router as an example, file-based routing imposes rigid rules with (subjectively) awkward conventions on the file structure, while code-based routing introduces long-winded scaffolding code (as in `createRootRoute()`, `createRoute()` and explicitly registering the router type).
 
